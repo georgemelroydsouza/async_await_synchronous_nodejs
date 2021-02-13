@@ -1,0 +1,2 @@
+docker-compose up --build --remove-orphans
+docker exec -it helpdesk-mongodb bash

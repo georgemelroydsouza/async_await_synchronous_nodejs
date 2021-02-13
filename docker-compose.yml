@@ -1,0 +1,23 @@
+version: "3.2"
+services:
+     
+  mongodb:
+    container_name: helpdesk-mongodb
+    image: mongo:4.2.8
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongodb:/data/db
+      
+  nodeweb:
+    container_name: helpdesk-nodeweb
+    build: .
+    ports:
+      - "8080:8080"
+    restart: on-failure
+    volumes:
+      - ./app/:/usr/src/app/
+    links:
+      - mongodb
+    environment:
+      WAIT_HOSTS: mongodb:27017
